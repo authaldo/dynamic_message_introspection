@@ -25,6 +25,7 @@ find_package(rosidl_runtime_cpp REQUIRED)
 find_package(rosidl_typesupport_introspection_c REQUIRED)
 find_package(rosidl_typesupport_introspection_cpp REQUIRED)
 find_package(yaml_cpp_vendor REQUIRED)
+find_package(yaml-cpp REQUIRED)
 
 # See config.hpp.in
 option(DYNMSG_VALUE_ONLY "Write message member value directly instead default+value" ON)
@@ -42,6 +43,7 @@ add_library(dynmsg STATIC
   src/string_utils.cpp
   src/yaml_utils.cpp
 )
+target_link_libraries(dynmsg yaml-cpp::yaml-cpp)
 ament_target_dependencies(dynmsg
   rcutils
   rosidl_runtime_c
@@ -64,6 +66,7 @@ ament_export_dependencies(rosidl_runtime_cpp)
 ament_export_dependencies(rosidl_typesupport_introspection_c)
 ament_export_dependencies(rosidl_typesupport_introspection_cpp)
 ament_export_dependencies(yaml_cpp_vendor)
+ament_export_dependencies(yaml-cpp)
 
 install(
   DIRECTORY include/ ${CMAKE_CURRENT_BINARY_DIR}/include/
